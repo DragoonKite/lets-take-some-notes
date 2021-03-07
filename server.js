@@ -9,6 +9,7 @@ const PORT = 3001;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(__dirname + '/Develop/public'));
 
 // Data
 let notes = require('./Develop/db/db')
@@ -31,7 +32,7 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req,res) => {
-    res.json(notes)
+    return res.json(notes)
 });
 
 app.post('/api/notes', (req,res) => {
@@ -46,7 +47,7 @@ app.post('/api/notes', (req,res) => {
 }); 
 
 app.delete('/api/notes/:id', (req,res) => {
-    reaperID = parseInt(req.params.id);
+    reaperID = req.params.id;
     notes = notes.filter((note) => note.id !== reaperID);
 
     saveNotes();
