@@ -54,6 +54,6 @@ app.delete('/api/notes/:id', (req,res) => {
 });
 
 // Listener
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
     console.log(`App listening on PORT ${PORT}`);
 });
